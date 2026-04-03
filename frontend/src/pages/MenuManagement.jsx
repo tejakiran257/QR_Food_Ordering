@@ -29,7 +29,8 @@ const MenuManagement = () => {
     const generateQR = async () => {
         try {
             const token = localStorage.getItem('ownerToken');
-            const { data } = await axios.get('/api/qr', {
+            const frontendUrl = encodeURIComponent(window.location.origin);
+            const { data } = await axios.get(`/api/qr?frontend=${frontendUrl}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setQrCodeUrl(data.qrCodeUrl);
