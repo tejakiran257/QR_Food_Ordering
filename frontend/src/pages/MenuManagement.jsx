@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { FaPlus, FaEdit, FaTrash, FaImage, FaQrcode, FaCheck } from 'react-icons/fa';
+import { getImageUrl } from '../utils/getImageUrl';
 
 const MenuManagement = () => {
     const [menuItems, setMenuItems] = useState([]);
@@ -185,7 +186,7 @@ const MenuManagement = () => {
                     }`}>
                         {/* Image side */}
                         <div className="relative w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0 rounded-xl overflow-hidden bg-gray-50">
-                            <img src={item.image} alt={item.name} loading="lazy" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" />
+                            <img src={getImageUrl(item.image)} alt={item.name} loading="lazy" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" />
                             <div className="absolute top-2 left-2 bg-white/90 backdrop-blur-sm p-1 rounded-lg shadow-sm">
                                 <div className={`w-2.5 h-2.5 rounded-full ${item.isVeg === false ? 'bg-red-500 border border-red-700' : 'bg-green-500 border border-green-700'}`} title={item.isVeg === false ? 'Non-Veg' : 'Veg'}></div>
                             </div>

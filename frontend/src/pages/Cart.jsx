@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { FaArrowLeft, FaTrash, FaMinus, FaPlus, FaMoneyBillWave, FaCreditCard } from 'react-icons/fa';
+import { getImageUrl } from '../utils/getImageUrl';
 
 const Cart = () => {
     const { cart, removeFromCart, updateQuantity, clearCart, total } = useContext(CartContext);
@@ -178,7 +179,7 @@ const Cart = () => {
                     <div className="space-y-6">
                         {cart.map(item => (
                             <div key={item.menuItem} className="flex items-center gap-5">
-                                <img src={item.image} alt={item.name} className="w-20 h-20 rounded-xl object-cover bg-gray-100 border border-gray-50 shadow-sm" />
+                                <img src={getImageUrl(item.image)} alt={item.name} className="w-20 h-20 rounded-xl object-cover bg-gray-100 border border-gray-50 shadow-sm" />
                                 <div className="flex-1 min-w-0">
                                     <div className="flex justify-between items-start mb-1">
                                         <h4 className="font-bold text-gray-900 text-lg leading-tight pr-4">{item.name}</h4>
