@@ -16,9 +16,9 @@ const getLocalIp = () => {
 export const generateQRCode = async (req, res) => {
     try {
         const ip = getLocalIp();
-        let frontendUrl = process.env.FRONTEND_URL || `http://${ip}:5173`;
+        let frontendUrl = process.env.FRONTEND_URL || 'https://qr-food-ordering-rho.vercel.app';
         
-        // Ensure QR code uses the local IP instead of localhost for mobile scanning
+        // If testing locally, convert localhost to network IP for mobile scanning
         if (frontendUrl.includes('localhost')) {
             frontendUrl = frontendUrl.replace('localhost', ip);
         }
