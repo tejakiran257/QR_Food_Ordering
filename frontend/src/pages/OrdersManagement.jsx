@@ -138,7 +138,12 @@ const OrdersManagement = () => {
                                         updateStatus(order._id, 'Ready');
                                         const phone = String(order.customerPhone).replace(/\D/g, '').slice(-10);
                                         if (phone.length === 10) {
-                                            window.open(`https://wa.me/91${phone}?text=${encodeURIComponent(customMessage)}`, '_blank');
+                                            const newWindow = window.open(`https://wa.me/91${phone}?text=${encodeURIComponent(customMessage)}`, '_blank');
+                                            if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+                                                toast.error('Pop-up blocked! Please allow pop-ups for this site to open WhatsApp.', { duration: 5000 });
+                                            }
+                                        } else {
+                                            toast.error('Invalid customer phone number.');
                                         }
                                     }
                                 }} className="w-full sm:w-auto flex items-center justify-center bg-green-500 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-green-600 hover:shadow transition-all">
