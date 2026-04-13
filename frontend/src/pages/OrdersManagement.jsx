@@ -132,7 +132,16 @@ const OrdersManagement = () => {
                                 </button>
                             )}
                             {order.orderStatus === 'Preparing' && (
-                                <button onClick={() => updateStatus(order._id, 'Ready')} className="w-full sm:w-auto flex items-center justify-center bg-green-500 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-green-600 hover:shadow transition-all">
+                                <button onClick={() => {
+                                    const customMessage = window.prompt("Enter WhatsApp message to send to customer:", `Hello! Your order (Token: ${order.tokenNumber}) is now READY for pickup.`);
+                                    if(customMessage !== null) {
+                                        updateStatus(order._id, 'Ready');
+                                        const phone = String(order.customerPhone).replace(/\D/g, '').slice(-10);
+                                        if (phone.length === 10) {
+                                            window.open(`https://wa.me/91${phone}?text=${encodeURIComponent(customMessage)}`, '_blank');
+                                        }
+                                    }
+                                }} className="w-full sm:w-auto flex items-center justify-center bg-green-500 text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-green-600 hover:shadow transition-all">
                                     Mark as Ready
                                 </button>
                             )}
